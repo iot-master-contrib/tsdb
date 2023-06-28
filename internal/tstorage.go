@@ -64,7 +64,7 @@ func Query(metric, id string, field string, start, end, window string) ([]*Point
 	if err != nil {
 		return nil, err
 	}
-	points, err := storage.Select(metric, []tstorage.Label{{Name: "key", Value: field}}, s, e)
+	points, err := storage.Select(metric, []tstorage.Label{{"key", field}, {"id", id}}, s, e)
 	if err != nil {
 		//无数据
 		if err == tstorage.ErrNoDataPoints {
@@ -114,6 +114,13 @@ func init() {
 }
 
 func parseTime(tm string) (int64, error) {
+	//标准日期串
+	t, err := time.Parse(time.RFC3339, tm)
+	if err == nil {
+		return t.UnixMilli(), nil
+	}
+
+	//influxdb格式
 	ss := timeReg.FindStringSubmatch(tm)
 	if ss == nil || len(ss) != 3 {
 		return 0, errors.New("错误时间")
