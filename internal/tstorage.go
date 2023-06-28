@@ -119,7 +119,7 @@ func parseTimeEx(tm string) (int64, error) {
 		return t.UnixMilli(), nil
 	}
 	tt, err := parseTime(tm)
-	if err == nil {
+	if err != nil {
 		return 0, err
 	}
 	return tt + time.Now().UnixMilli(), nil
