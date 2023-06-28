@@ -1,0 +1,265 @@
+basePath: /app/influxdb/api/
+definitions:
+  api.ReplyData-array_influx_Point:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/influx.Point'
+        type: array
+      error:
+        type: string
+    type: object
+  api.ReplyData-influx_Options:
+    properties:
+      data:
+        $ref: '#/definitions/influx.Options'
+      error:
+        type: string
+    type: object
+  api.ReplyData-int:
+    properties:
+      data:
+        type: integer
+      error:
+        type: string
+    type: object
+  influx.Options:
+    properties:
+      bucket:
+        type: string
+      org:
+        type: string
+      token:
+        type: string
+      url:
+        type: string
+    type: object
+  influx.Point:
+    properties:
+      time:
+        type: string
+      value: {}
+    type: object
+info:
+  contact: {}
+  description: API文档
+  title: 历史数据库接口文档
+  version: 1.0 版本
+paths:
+  /config/influxdb:
+    get:
+      consumes:
+      - application/json
+      description: 查询数据库配置
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-influx_Options'
+      summary: 查询数据库配置
+      tags:
+      - config
+    post:
+      consumes:
+      - application/json
+      description: 修改数据库配置
+      parameters:
+      - description: 数据库配置
+        in: body
+        name: cfg
+        required: true
+        schema:
+          $ref: '#/definitions/influx.Options'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-int'
+      summary: 修改数据库配置
+      tags:
+      - config
+  /query/{pid}/{id}/{name}:
+    get:
+      description: 查询历史数据
+      parameters:
+      - description: 产品ID
+        in: path
+        name: pid
+        required: true
+        type: string
+      - description: 设备ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 变量名称
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: 起始时间
+        in: query
+        name: start
+        type: string
+      - description: 结束时间
+        in: query
+        name: end
+        type: string
+      - description: 窗口时间
+        in: query
+        name: window
+        type: string
+      - description: 算法
+        in: query
+        name: fn
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-array_influx_Point'
+      summary: 查询历史数据
+      tags:
+      - query
+  /query/{pid}/{id}/{name}/export:
+    get:
+      description: 导出历史数据
+      parameters:
+      - description: 产品ID
+        in: path
+        name: pid
+        required: true
+        type: string
+      - description: 设备ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 变量名称
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: 起始时间
+        in: query
+        name: start
+        type: string
+      - description: 结束时间
+        in: query
+        name: end
+        type: string
+      - description: 窗口时间
+        in: query
+        name: window
+        type: string
+      - description: 算法
+        in: query
+        name: fn
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-array_influx_Point'
+      summary: 导出历史数据
+      tags:
+      - query
+  /rate/{pid}/{id}/{name}:
+    get:
+      description: 查询历史数据增长
+      parameters:
+      - description: 产品ID
+        in: path
+        name: pid
+        required: true
+        type: string
+      - description: 设备ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 变量名称
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: 起始时间
+        in: query
+        name: start
+        type: string
+      - description: 结束时间
+        in: query
+        name: end
+        type: string
+      - description: 窗口时间
+        in: query
+        name: window
+        type: string
+      - description: 算法
+        in: query
+        name: fn
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-array_influx_Point'
+      summary: 查询历史数据增长
+      tags:
+      - rate
+  /rate/{pid}/{id}/{name}/export:
+    get:
+      description: 导出历史数据增长
+      parameters:
+      - description: 产品ID
+        in: path
+        name: pid
+        required: true
+        type: string
+      - description: 设备ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 变量名称
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: 起始时间
+        in: query
+        name: start
+        type: string
+      - description: 结束时间
+        in: query
+        name: end
+        type: string
+      - description: 窗口时间
+        in: query
+        name: window
+        type: string
+      - description: 算法
+        in: query
+        name: fn
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.ReplyData-array_influx_Point'
+      summary: 导出历史数据增长
+      tags:
+      - rate
+swagger: "2.0"
