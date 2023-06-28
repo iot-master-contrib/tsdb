@@ -48,17 +48,15 @@ func Write(metric, id string, values map[string]interface{}, tm int64) error {
 
 func Query(metric, id string, field string, start, end, window string) ([]*Point, error) {
 	//相对时间转化为时间戳
-	s, err := parseTime(start)
+	s, err := parseTimeEx(start)
 	if err != nil {
 		return nil, err
 	}
-	s += time.Now().UnixMilli()
 
-	e, err := parseTime(end)
+	e, err := parseTimeEx(end)
 	if err != nil {
 		return nil, err
 	}
-	e += time.Now().UnixMilli()
 
 	w, err := parseTime(window)
 	if err != nil {
@@ -113,13 +111,21 @@ func init() {
 	timeReg = regexp.MustCompile(`^(-?\d+)(h|m|s)$`)
 }
 
-func parseTime(tm string) (int64, error) {
+func parseTimeEx(tm string) (int64, error) {
 	//标准日期串
 	t, err := time.Parse(time.RFC3339, tm)
 	if err == nil {
+		//距离现在的时间
 		return t.UnixMilli(), nil
 	}
+	tt, err := parseTime(tm)
+	if err == nil {
+		return 0, err
+	}
+	return tt + time.Now().UnixMilli(), nil
+}
 
+func parseTime(tm string) (int64, error) {
 	//influxdb格式
 	ss := timeReg.FindStringSubmatch(tm)
 	if ss == nil || len(ss) != 3 {
