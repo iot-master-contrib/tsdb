@@ -491,8 +491,8 @@ github.com/xuri/nfp v0.0.0-20230503010013-3f38cdbb0b83/go.mod h1:WwHg+CVyzlv/TX9
 github.com/yuin/goldmark v1.2.1/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
 github.com/zenazn/goji v0.9.0/go.mod h1:7S9M489iMyHBNxwZnk9/EHS098H4/F6TATF2mIxtB1Q=
-github.com/zgwit/iot-master/v3 v3.3.2 h1:vo/i6xc0/ty/ECeH3kARvvS+wh6YXt1P7vbk1ugMkcM=
-github.com/zgwit/iot-master/v3 v3.3.2/go.mod h1:67INOuXwkRqQthJXkYI1NtB2FUcjbTSF1P+6GQlBUK8=
+github.com/zgwit/iot-master/v3 v3.4.0 h1:jDuUqJOCuMnfL+UIws3pJEJiy37wL14A3Ub61tXXuxY=
+github.com/zgwit/iot-master/v3 v3.4.0/go.mod h1:WNZg8JyTY1mJ+TFcrMFw0JtlaE6Fd64Yxt1cPEo5XEc=
 github.com/zgwit/swagger-files v1.0.0 h1:aE0iX7r3Nh/c1CTLHPqX9Oo/14Nti4xssHTNsQpylkc=
 github.com/zgwit/swagger-files v1.0.0/go.mod h1:1d6t8kgfOaE/IZW3KXMjp1K9EftV65QaQPs4LsQMabQ=
 github.com/ziutek/mymysql v1.5.4/go.mod h1:LMSpPZ6DbqWFxNCHW77HeMg9I646SAhApZ/wKdgO/C0=

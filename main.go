@@ -46,7 +46,7 @@ func Startup(app *web.Engine) error {
 		return err
 	}
 
-	internal.SubscribeProperty(mqtt.Client)
+	internal.SubscribeProperty()
 
 	//注册前端接口
 	api.RegisterRoutes(app.Group("/app/tsdb/api"))
@@ -59,7 +59,9 @@ func Startup(app *web.Engine) error {
 
 func Register() error {
 	payload, _ := json.Marshal(App())
-	return mqtt.Publish("master/register", payload, false, 0)
+	token := mqtt.Publish("master/register", payload)
+	token.Wait()
+	return token.Error()
 }
 
 func Static(fs *web.FileSystem) {

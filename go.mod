@@ -3,12 +3,11 @@ module github.com/iot-master-contrib/tsdb
 go 1.18
 
 require (
-	github.com/eclipse/paho.mqtt.golang v1.4.2
 	github.com/gin-gonic/gin v1.9.1
 	github.com/nakabonne/tstorage v0.3.6
 	github.com/swaggo/swag v1.16.1
 	github.com/xuri/excelize/v2 v2.7.1
-	github.com/zgwit/iot-master/v3 v3.3.2
+	github.com/zgwit/iot-master/v3 v3.4.0
 )
 
 require (
@@ -17,6 +16,7 @@ require (
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/denisenkom/go-mssqldb v0.12.3 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
+	github.com/eclipse/paho.mqtt.golang v1.4.2 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
 	github.com/gin-contrib/cors v1.4.0 // indirect
 	github.com/gin-contrib/gzip v0.0.6 // indirect

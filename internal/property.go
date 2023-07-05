@@ -1,25 +1,17 @@
 package internal
 
 import (
-	"encoding/json"
-	mqtt "github.com/eclipse/paho.mqtt.golang"
+	"github.com/zgwit/iot-master/v3/pkg/mqtt"
 	"strings"
 	"time"
 )
 
-func SubscribeProperty(client mqtt.Client) {
+func SubscribeProperty() {
 	//订阅消息
-	client.Subscribe("up/property/+/+", 0, func(client mqtt.Client, message mqtt.Message) {
-		topics := strings.Split(message.Topic(), "/")
+	mqtt.SubscribeJson("up/property/+/+", func(topic string, properties map[string]interface{}) {
+		topics := strings.Split(topic, "/")
 		pid := topics[2]
 		id := topics[3]
-
-		var properties map[string]interface{}
-		err := json.Unmarshal(message.Payload(), &properties)
-		if err != nil {
-			//log
-			return
-		}
 
 		tm := time.Now()
 		_ = Write(pid, id, properties, tm.UnixMilli())
